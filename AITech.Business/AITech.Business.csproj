@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AITech.DataAccess\AITech.DataAccess.csproj" />
-    <ProjectReference Include="..\AITech.DTO\AITech.DTO.csproj" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\CategoryServices\" />
+    <ProjectReference Include="..\AITech.DataAccess\AITech.DataAccess.csproj" />
+    <ProjectReference Include="..\AITech.DTO\AITech.DTO.csproj" />
   </ItemGroup>
 
 </Project>

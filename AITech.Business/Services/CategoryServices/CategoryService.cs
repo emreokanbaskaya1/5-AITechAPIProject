@@ -17,27 +17,43 @@ namespace AITech.Business.Services.CategoryServices
         {
             var category = createDto.Adapt<Category>();
             await _categoryRepository.CreateAsync(category);
-            _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task TDeleteAsync(ResultCategoryDto resultDto)
+        public async Task TDeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category is null)
+            {
+                throw new Exception("It is not found a category that need to delete.");
+            }
+
+            _categoryRepository.Delete(category);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task<List<ResultCategoryDto>> TGetAllAsync()
+        public async Task<List<ResultCategoryDto>> TGetAllAsync()
         {
-            throw new NotImplementedException();
+            var categories = await _categoryRepository.GetAllAsync();
+            return categories.Adapt<List<ResultCategoryDto>>();
         }
 
-        public Task<ResultCategoryDto> TGetByIdAsync(int id)
+        public async Task<ResultCategoryDto> TGetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category is null)
+            {
+                throw new Exception("Category is not found");
+            }
+            return category.Adapt<ResultCategoryDto>();
+
         }
 
-        public Task TUpdateAsync(UpdateCategoryDto updateDto)
+        public async Task TUpdateAsync(UpdateCategoryDto updateDto)
         {
-            throw new NotImplementedException();
+            var category = updateDto.Adapt<Category>();
+            _categoryRepository.Update(category);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

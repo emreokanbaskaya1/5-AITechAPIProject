@@ -12,6 +12,6 @@ namespace AITech.Business.Services.GenericServices
         Task<TResultDto> TGetByIdAsync(int id);
         Task TCreateAsync(TCreateDto createDto);
         Task TUpdateAsync(TUpdateDto updateDto);
-        Task TDeleteAsync(TResultDto resultDto);
+        Task TDeleteAsync(int id);
     }
 }

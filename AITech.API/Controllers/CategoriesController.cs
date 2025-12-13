@@ -30,5 +30,19 @@ namespace AITech.API.Controllers
             await _categoryService.TCreateAsync(categoryDto);
             return Ok(categoryDto);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateCategoryDto categoryDto)
+        {
+            await _categoryService.TUpdateAsync(categoryDto);
+            return Ok("Category is updated");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _categoryService.TDeleteAsync(id);
+            return Ok("Category is deleted");
+        }
     }
 }

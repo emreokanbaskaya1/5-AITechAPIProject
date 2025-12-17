@@ -1,6 +1,7 @@
 ﻿using AITech.DataAccess.Context;
 using AITech.DataAccess.Repositories.GenericRepositories;
 using AITech.Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,14 @@ namespace AITech.DataAccess.Repositories.ProjectRepositories
     {
         public ProjectRepository(AppDbContext _context) : base(_context)
         {
+        }
+
+        public async Task<List<Project>> GetProjectsWithCategoriesAsync()
+        {
+            return await _context.Projects
+                .AsNoTracking()
+                .Include(p => p.Category)
+                .ToListAsync();
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model List<ResultProjectDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<h3>Projects</h3>
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Project Title</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@item.Id</th>
+            <td><img src="@item.ImageUrl" style="height: 75px; width:75px; border-radius:50%"/>@item.Title</td>
+            <td>@item.Category.Name</td>
+            <td>
+                <a href="/Admin/Project/DeleteProject/@item.Id" class="btn btn-danger">Delete</a>
+                <a href="/Admin/Project/UpdateProject/@item.Id" class="btn btn-info">Update</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<a href="/Admin/Project/CreateProject" class="btn btn-primary">Create New Project</a>
+

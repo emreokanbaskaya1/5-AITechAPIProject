@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AITech.DTO.BannerDtos
 {
-    public record class CreateBannerDto(int Id, string? Title, string? Description, string? ImageUrl, bool IsActive);
+    public record class CreateBannerDto(string? Title, string? Description, string? ImageUrl, bool IsActive);
     
    
 }

@@ -14,10 +14,10 @@ namespace AITech.WebUI.Services.BannerServices
 
 
 
-        public async Task CreateAsync(CreateBannerDto BannerDto)
+        public async Task CreateAsync(CreateBannerDto bannerDto)
         {
 
-            await _client.PostAsJsonAsync("Banners", BannerDto);
+            await _client.PostAsJsonAsync("Banners", bannerDto);
         }
 
         public async Task DeleteAsync(int id)
@@ -36,18 +36,18 @@ namespace AITech.WebUI.Services.BannerServices
             return await _client.GetFromJsonAsync<UpdateBannerDto>("Banners/" + id);
         }
 
-        public async Task UpdateAsync(UpdateBannerDto BannerDto)
+        public async Task UpdateAsync(UpdateBannerDto bannerDto)
         {
-            await _client.PutAsJsonAsync("Banners", BannerDto);
+            await _client.PutAsJsonAsync("Banners", bannerDto);
         }
-        public Task MakeActiveAsync(int id)
+        public async Task MakeActiveAsync(int id)
         {
-            throw new NotImplementedException();
+            await _client.PatchAsync("banners/makeActive/" + id, null);
         }
 
-        public Task MakePassiveAsync(int id)
+        public async Task MakePassiveAsync(int id)
         {
-            throw new NotImplementedException();
+            await _client.PatchAsync("banners/makePassive/" + id, null);
         }
 
     }

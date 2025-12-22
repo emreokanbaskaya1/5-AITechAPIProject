@@ -1,13 +1,13 @@
-﻿using AITech.DataAccess.Repositories.BannerRepositories;
+﻿using AITech.DataAccess.Context;
+using AITech.DataAccess.Interceptors;
+using AITech.DataAccess.Repositories.AboutRepositories;
+using AITech.DataAccess.Repositories.BannerRepositories;
 using AITech.DataAccess.Repositories.CategoryRepositories;
 using AITech.DataAccess.Repositories.ProjectRepositories;
 using AITech.DataAccess.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AITech.DataAccess.Extensions
 {
@@ -18,6 +18,7 @@ namespace AITech.DataAccess.Extensions
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IBannerRepository, BannerRepository>();
+            services.AddScoped<IAboutRepository, AboutRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             
         }

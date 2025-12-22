@@ -1,0 +1,53 @@
+@model AITech.WebUI.DTOs.AboutDtos.CreateAboutDto
+
+@{
+    ViewData["Title"] = "Create About";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Create New About</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateAbout" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label">Title</label>
+                        <input asp-for="Title" class="form-control" placeholder="Enter title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="6" placeholder="Enter description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ImageUrl" class="form-label">Image URL</label>
+                        <input asp-for="ImageUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        <small class="form-text text-muted">
+                            Enter full URL or path: e.g., ~/AI-html-1.0.0/img/about-img.jpg
+                        </small>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

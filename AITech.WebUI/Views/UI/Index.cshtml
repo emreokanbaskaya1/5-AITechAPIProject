@@ -24,7 +24,7 @@
 <!-- Testimonials Component -->
 @await Component.InvokeAsync("_TestimonialComponentPartial")
 
-<!-- Newsletter Start -->
+<!-- AI Newsletter Start -->
 <div class="container-fluid bg-primary newsletter py-5">
     <div class="container">
         <div class="row g-5 align-items-center">
@@ -32,17 +32,83 @@
                 <img class="img-fluid" src="~/AI-html-1.0.0/img/newsletter.png" alt="">
             </div>
             <div class="col-md-7 py-5 newsletter-text wow fadeIn" data-wow-delay="0.5s">
-                <div class="btn btn-sm border rounded-pill text-white px-3 mb-3">Newsletter</div>
-                <h1 class="text-white mb-4">Let's subscribe the newsletter</h1>
+                <div class="btn btn-sm border rounded-pill text-white px-3 mb-3">AI Assistant</div>
+                <h1 class="text-white mb-4">Ask Our AI Assistant</h1>
+                <p class="text-white-50 mb-3">Ask anything about our services or artificial intelligence technologies!</p>
                 <div class="position-relative w-100 mt-3 mb-2">
-                    <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text"
-                        placeholder="Enter Your Email" style="height: 48px;">
-                    <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i
-                            class="fa fa-paper-plane text-primary fs-4"></i></button>
+                    <input id="aiQuestion" class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text"
+                        placeholder="E.g: What is machine learning?" style="height: 48px;">
+                    <button type="button" id="askAiBtn" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2">
+                        <i class="fa fa-paper-plane text-primary fs-4"></i>
+                    </button>
                 </div>
-                <small class="text-white-50">Diam sed sed dolor stet amet eirmod</small>
+                <div id="aiResponse" class="mt-3" style="display: none;">
+                    <div class="alert alert-light" role="alert">
+                        <strong>AI Response:</strong>
+                        <p id="aiAnswerText" class="mb-0 mt-2"></p>
+                    </div>
+                </div>
+                <div id="aiLoading" class="mt-3" style="display: none;">
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span class="text-white ms-2">AI is thinking...</span>
+                </div>
+                <small class="text-white-50">Powered by Gemini AI</small>
             </div>
         </div>
     </div>
 </div>
-<!-- Newsletter End -->
+<!-- AI Newsletter End -->
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#askAiBtn').click(function () {
+                askAI();
+            });
+
+            $('#aiQuestion').keypress(function (e) {
+                if (e.which == 13) {
+                    askAI();
+                }
+            });
+
+            function askAI() {
+                var question = $('#aiQuestion').val().trim();
+                
+                if (question === '') {
+                    alert('Please enter a question.');
+                    return;
+                }
+
+                $('#aiResponse').hide();
+                $('#aiLoading').show();
+                $('#askAiBtn').prop('disabled', true);
+
+                $.ajax({
+                    url: '/Newsletter/AskQuestion',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ question: question }),
+                    success: function (response) {
+                        $('#aiLoading').hide();
+                        $('#askAiBtn').prop('disabled', false);
+
+                        if (response.success) {
+                            $('#aiAnswerText').text(response.answer);
+                            $('#aiResponse').fadeIn();
+                        } else {
+                            alert(response.message || 'An error occurred.');
+                        }
+                    },
+                    error: function () {
+                        $('#aiLoading').hide();
+                        $('#askAiBtn').prop('disabled', false);
+                        alert('An error occurred. Please try again.');
+                    }
+                });
+            }
+        });
+    </script>
+}

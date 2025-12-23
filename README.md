@@ -542,3 +542,22 @@ Planned features for future releases:
 ⭐ **If you found this project helpful, please give it a star!**
 
 **Built with ❤️ using ASP.NET Core 8 and Google Gemini AI**
+
+
+<img width="1919" height="993" alt="1" src="https://github.com/user-attachments/assets/90b6eaed-890a-4fc3-b77c-e2f9bf55bfba" />
+<img width="1919" height="913" alt="2" src="https://github.com/user-attachments/assets/e4eecebf-4aaf-44ba-9031-fba5d9c0c977" />
+<img width="1905" height="756" alt="3" src="https://github.com/user-attachments/assets/65bbe349-e9e3-4504-bbb3-7897548d32bb" />
+<img width="1903" height="611" alt="4" src="https://github.com/user-attachments/assets/34f161f5-d596-4149-af5b-a442ded5422d" />
+<img width="1907" height="593" alt="5" src="https://github.com/user-attachments/assets/1ed4809d-c786-4231-a276-98a1d209978b" />
+<img width="1919" height="816" alt="6" src="https://github.com/user-attachments/assets/635b6fdb-6b73-457c-96d9-986ead8b48ed" />
+<img width="1919" height="998" alt="12" src="https://github.com/user-attachments/assets/0c093d8d-fa80-4cb5-bf90-b921201c6c3c" />
+<img width="1919" height="993" alt="11" src="https://github.com/user-attachments/assets/5eda485b-4608-4e55-86ba-626bbd09a0b8" />
+<img width="1919" height="990" alt="10" src="https://github.com/user-attachments/assets/4d223db8-bebd-4474-9d10-535b5260fdfa" />
+<img width="1919" height="994" alt="8" src="https://github.com/user-attachments/assets/1a4625a6-ef90-4ded-a385-b8a40adcac02" />
+<img width="1919" height="995" alt="9" src="https://github.com/user-attachments/assets/b7292354-eabc-449e-814a-a7597c1022c2" />
+<img width="1919" height="993" alt="7" src="https://github.com/user-attachments/assets/c668cecf-ce60-4d28-a112-db4cd878b30e" />
+
+
+
+
+

@@ -1,11 +1,13 @@
 ﻿using AITech.WebUI.DTOs.BannerDtos;
 using AITech.WebUI.Services.BannerServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace AITech.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BannerController(IBannerService _bannerService) : Controller
     {
         public async Task<IActionResult> Index()
@@ -23,10 +25,15 @@ namespace AITech.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBanner(CreateBannerDto bannerDto)
         {
-            await _bannerService.CreateAsync(bannerDto);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _bannerService.CreateAsync(bannerDto);
+                return RedirectToAction("Index");
+            }
+            return View(bannerDto);
         }
 
+        [HttpGet]
         public async Task<IActionResult> UpdateBanner(int id)
         {
             var banner = await _bannerService.GetByIdAsync(id);
@@ -36,10 +43,13 @@ namespace AITech.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateBanner(UpdateBannerDto bannerDto)
         {
-            await _bannerService.UpdateAsync(bannerDto);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _bannerService.UpdateAsync(bannerDto);
+                return RedirectToAction("Index");
+            }
+            return View(bannerDto);
         }
-
 
         public async Task<IActionResult> MakeActive(int id)
         {

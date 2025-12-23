@@ -1,0 +1,38 @@
+@model List<AITech.WebUI.DTOs.ProjectDtos.ResultProjectDto>
+
+<!-- Case Study Start -->
+<div class="container-fluid bg-light py-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Case Study</div>
+            <h1 class="mb-4">Explore Our Recent AI Case Studies</h1>
+        </div>
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+                @for (int i = 0; i < Model.Count && i < 3; i++)
+                {
+                    var project = Model[i];
+                    var delay = (i + 1) * 0.2;
+                    <div class="col-lg-4 wow fadeIn" data-wow-delay="@(delay)s">
+                        <div class="case-item position-relative overflow-hidden rounded mb-2">
+                            <img class="img-fluid" src="@project.ImageUrl" alt="@project.Title">
+                            <a class="case-overlay text-decoration-none" href="#">
+                                <small>@project.Category?.Name</small>
+                                <h5 class="lh-base text-white mb-3">@project.Title</h5>
+                                <span class="btn btn-square btn-primary"><i class="fa fa-arrow-right"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center">
+                <p>No case studies available yet.</p>
+            </div>
+        }
+    </div>
+</div>
+<!-- Case Study End -->

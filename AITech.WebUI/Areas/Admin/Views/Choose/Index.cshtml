@@ -1,0 +1,73 @@
+@model List<AITech.WebUI.DTOs.ChooseDtos.ResultChooseDto>
+
+@{
+    ViewData["Title"] = "Why Choose Us Management";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Why Choose Us</h3>
+                <a asp-action="CreateChoose" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create New
+                </a>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Items</th>
+                                    <th>Image</th>
+                                    <th style="width: 200px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var choose in Model)
+                                {
+                                    <tr>
+                                        <td>@choose.Id</td>
+                                        <td>@choose.Title</td>
+                                        <td>@(choose.Description.Length > 50 ? choose.Description.Substring(0, 50) + "..." : choose.Description)</td>
+                                        <td>
+                                            <small>
+                                                1. @choose.Item1<br/>
+                                                2. @choose.Item2<br/>
+                                                3. @choose.Item3
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <img src="@choose.ImageUrl" alt="@choose.Title" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;" />
+                                        </td>
+                                        <td>
+                                            <a asp-action="UpdateChoose" asp-route-id="@choose.Id" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a asp-action="DeleteChoose" asp-route-id="@choose.Id" class="btn btn-danger btn-sm" 
+                                               onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No records found.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

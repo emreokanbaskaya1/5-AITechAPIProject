@@ -51,7 +51,21 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a asp-area="" asp-controller="UI" asp-action="Index" class="nav-item nav-link active">Home</a>
-                        <a asp-area="Admin" asp-controller="About" asp-action="Index" class="nav-item nav-link">Admin Panel</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a asp-area="Admin" asp-controller="Banner" asp-action="Index" class="nav-item nav-link">
+                                <i class="fas fa-user-shield me-1"></i>Admin Panel
+                            </a>
+                            <a asp-area="" asp-controller="Login" asp-action="Logout" class="nav-item nav-link">
+                                <i class="fas fa-sign-out-alt me-1"></i>Logout
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Login" asp-action="Index" class="nav-item nav-link">
+                                <i class="fas fa-lock me-1"></i>Admin Giriþ Yap
+                            </a>
+                        }
                     </div>
                 </div>
             </nav>
@@ -77,6 +91,7 @@
                     <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
                     <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                     <p><i class="fa fa-envelope me-3"></i>info@aitech.com</p>
+                    @await Component.InvokeAsync("_SocialComponentPartial")
                 </div>
             </div>
         </div>

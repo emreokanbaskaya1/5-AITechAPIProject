@@ -1,36 +1,75 @@
-﻿@model List<ResultProjectDto>
+﻿@model List<AITech.WebUI.DTOs.ProjectDtos.ResultProjectDto>
+
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    int count = 0;
+    ViewData["Title"] = "Project Management";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h3>Projects</h3>
-
-
-<table class="table table-bordered">
-    <tr>
-        <th>#</th>
-        <th>Project Title</th>
-        <th>Actions</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        count++;
-        <tr>
-            <th>@item.Id</th>
-            <td><img src="@item.ImageUrl" style="height: 75px; width:75px; border-radius:50%"/>@item.Title</td>
-            <td>@item.Category.Name</td>
-            <td>
-                <a href="/Admin/Project/DeleteProject/@item.Id" class="btn btn-danger">Delete</a>
-                <a href="/Admin/Project/UpdateProject/@item.Id" class="btn btn-info">Update</a>
-            </td>
-        </tr>
-    }
-
-</table>
-
-
-<a href="/Admin/Project/CreateProject" class="btn btn-primary">Create New Project</a>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Projects</h3>
+                <a asp-action="CreateProject" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create New
+                </a>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Image</th>
+                                    <th style="width: 200px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var project in Model)
+                                {
+                                    <tr>
+                                        <td>@project.Id</td>
+                                        <td>@project.Title</td>
+                                        <td>
+                                            @if (project.Category != null)
+                                            {
+                                                <span class="badge bg-primary">@project.Category.Name</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">No Category</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <img src="@project.ImageUrl" alt="@project.Title" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;" />
+                                        </td>
+                                        <td>
+                                            <a asp-action="UpdateProject" asp-route-id="@project.Id" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a asp-action="DeleteProject" asp-route-id="@project.Id" class="btn btn-danger btn-sm" 
+                                               onclick="return confirm('Are you sure you want to delete this project?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No projects found. Click "Create New" to add one.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 

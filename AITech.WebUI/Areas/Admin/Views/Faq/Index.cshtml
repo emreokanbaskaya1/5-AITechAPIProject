@@ -1,0 +1,61 @@
+@model List<AITech.WebUI.DTOs.FaqDtos.ResultFaqDto>
+
+@{
+    ViewData["Title"] = "FAQ Management";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">FAQs (Frequently Asked Questions)</h3>
+                <a asp-action="CreateFaq" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create New
+                </a>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th style="width: 200px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var faq in Model)
+                                {
+                                    <tr>
+                                        <td>@faq.Id</td>
+                                        <td>@faq.Question</td>
+                                        <td>@(faq.Answer.Length > 100 ? faq.Answer.Substring(0, 100) + "..." : faq.Answer)</td>
+                                        <td>
+                                            <a asp-action="UpdateFaq" asp-route-id="@faq.Id" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a asp-action="DeleteFaq" asp-route-id="@faq.Id" class="btn btn-danger btn-sm" 
+                                               onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No FAQs found.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
